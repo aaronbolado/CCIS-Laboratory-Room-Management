@@ -1,5 +1,3 @@
-package source.frontend;
-
 import javax.swing.*;
 
 public class AdminGUI {
