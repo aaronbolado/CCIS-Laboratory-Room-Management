@@ -2,11 +2,17 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainProgram implements ActionListener {
+public class MainProgram {
+    public static void main(String[] args) {
+    }
+}
+
+class WelcomeGUI implements ActionListener {
     JButton adminButton = new JButton("Admin");
     JButton userButton = new JButton("User");
     JFrame frame;
@@ -16,7 +22,7 @@ public class MainProgram implements ActionListener {
     final int buttonWidth = 287;
     final int buttonHeight = 57;
 
-    MainProgram () {
+    WelcomeGUI () {
         frame = new JFrame("Laboratory Room Management Program");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1200, 800);
@@ -38,10 +44,6 @@ public class MainProgram implements ActionListener {
         panel.setBackground(Color.decode("#949494"));
 
         frame.add(panel);
-    }
-
-    public static void main(String[] args) {
-        new MainProgram();
     }
 
     @Override
