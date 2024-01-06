@@ -1,20 +1,36 @@
 import javax.swing.*;
 
-public class AdminGUI {
-    JFrame frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+
+public class AdminGUI extends JPanel implements ActionListener {
+
     JTextField textField;
-    JButton[] menuButtons = new JButton[4]; // Add, Show, Edit, Delete
+    JButton addButton = new JButton("Add Schedule");
+    JButton showButton = new JButton("Show Schedule");
+    JButton deleteButton = new JButton("Delete Schedule");
+    JButton editButton = new JButton("Edit Schedule");
     JPanel panel;
 
     public AdminGUI () {
-        frame = new JFrame("Admin Interface");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1200, 800);
-        frame.setVisible(true);
-        frame.setLayout(null);
-
         panel = new JPanel();
-        
+        panel.setSize(1200, 800);
+        panel.setVisible(true);
+        panel.setLayout(null);
+
+        addButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(panel, "ERROR: " + "message", "Calculation Error", JOptionPane.ERROR_MESSAGE);
+        });
+
+        panel.add(addButton);
+        panel.add(showButton);
+        panel.add(deleteButton);
+        panel.add(editButton);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
     }
 }

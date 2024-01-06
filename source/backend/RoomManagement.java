@@ -12,26 +12,8 @@ public class RoomManagement {
         displayMenu();
         System.out.println("Enter choice: ");
         addSchedule();
-    }
-
-    public static boolean isExisting (int adminState) {
-
-        switch (adminState) {
-            case 1: // Add
-
-                break;
-            case 2: // Delete
-
-                break;
-            case 3: // Edit
-
-                break;
-            default:
-                break;
-        }
-
-
-        return true;
+        deleteSchedule();
+        showSchedule();
     }
 
     public static void addSchedule () {
@@ -84,18 +66,62 @@ public class RoomManagement {
         // Step 3: Write Updated JSON to the Same File
         writeJsonToFile(existingData, filePath);
     }
+    
+    public static void deleteSchedule () {
+        String date = getInput("Enter Date: ");
+        String room = getInput("Enter Room: ");
+        String section = getInput("Enter Section: ");
+
+        // Step 1: Read existing JSON data from the file
+        JSONObject existingData = readJsonFromFile(filePath);
+
+        // Step 2: Modify Data (Example: Add a new key-value pair)
+        JSONObject scheduleData = existingData.getJSONObject("schedule");
+
+        if (scheduleData.has(date)) { // Add room and schedule to date
+            // Date already exists, update the information for that date
+            JSONObject roomArray = scheduleData.getJSONObject(date);
+            
+            if (roomArray.has(room)){ // Add a schedule to room
+                // Room already exists, update the information for that room
+                JSONObject roomInfo = roomArray.getJSONObject(room);
+                if (roomInfo.has(section)) {
+                    roomInfo.remove(section);
+                
+                } else {
+                    System.out.println("Entry does not exist");
+                }
+                
+            } else { 
+                // Room doesn't exist, error
+                System.out.println("Entry does not exist");
+            }
+            
+        } else { 
+            // Date doesn't exist, error
+            System.out.println("Entry does not exist");
+        }
+
+        // Step 3: Write Updated JSON to the Same File
+        writeJsonToFile(existingData, filePath);
+    }
 
     // public void editSchedule () {
         
     // }
 
-    // public void showSchedule () {
+    public static void showSchedule () {
+        // Step 1: Read existing JSON data from the file
+        JSONObject existingData = readJsonFromFile(filePath);
         
-    // }
+        // Step 2: Get data from current day
 
-    // public void deleteSchedule () {
-        
-    // }
+        // Step 3: Display values for each room
+        for (String key : existingData.keySet()) {
+                Object value = existingData.get(key);
+                System.out.println("Key: " + key + ", Value: " + value);
+        }
+    }
 
     private static JSONObject readJsonFromFile(String filePath) {
         try (FileReader fileReader = new FileReader(filePath)) {

@@ -9,15 +9,18 @@
         "W501": {"CS 1-5": "AFTERNOON"}
     },
     "Jan 10": {
-        "S502": {"CS 3-3": "MORNING"},
-        "S501": {"CS 2-2": "MORNING"}
+        "S502": {
+            "CS 3-3": "MORNING",
+            "CS 4-4": "MORNING"
+        },
+        "S501": {
+            "CS 2-2": "MORNING",
+            "CS 1-4": "MORNING"
+        }
     },
     "Jan 6": {
         "S503": {"CS 1-1": "MORNING"},
-        "S500": {
-            "CS 1-1": "MORNING",
-            "CS 3-3": "MORNING"
-        },
+        "S500": {"CS 3-3": "MORNING"},
         "S501": {
             "CS 1-1": "AFTERNOON",
             "CS 1-3": "MORNING",
@@ -28,5 +31,6 @@
             "CS 1-1": "MORNING",
             "CS 3-3": "MORNING"
         }
-    }
+    },
+    "Jan 15": {"S500": {}}
 }}
