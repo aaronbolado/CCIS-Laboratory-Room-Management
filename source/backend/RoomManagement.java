@@ -13,7 +13,7 @@ public class RoomManagement {
         System.out.println("Enter choice: ");
         addSchedule();
         deleteSchedule();
-        showSchedule();
+        showRoomSchedule();
     }
 
     public static void addSchedule () {
@@ -67,6 +67,7 @@ public class RoomManagement {
         writeJsonToFile(existingData, filePath);
     }
     
+    // Can only delete section and time schedules.
     public static void deleteSchedule () {
         String date = getInput("Enter Date: ");
         String room = getInput("Enter Room: ");
@@ -110,16 +111,52 @@ public class RoomManagement {
         
     // }
 
-    public static void showSchedule () {
+    public static void showRoomSchedule () {
+        boolean viewRoomInfo = false;
+
+        String date = getInput("Enter Date: ");
+        String room = getInput("Enter Room: ");
+        String view = getInput("Is this for room info? ");
+        
+        if (view.equals("yes")) {
+            viewRoomInfo = true;
+        }
+
         // Step 1: Read existing JSON data from the file
         JSONObject existingData = readJsonFromFile(filePath);
         
         // Step 2: Get data from current day
+        JSONObject scheduleData = existingData.getJSONObject("schedule");
 
-        // Step 3: Display values for each room
-        for (String key : existingData.keySet()) {
-                Object value = existingData.get(key);
-                System.out.println("Key: " + key + ", Value: " + value);
+        if (scheduleData.has(date)) { // Add room and schedule to date
+            // Date exists, get information for that date
+            JSONObject roomArray = scheduleData.getJSONObject(date);
+            
+            if (roomArray.has(room)){ // Add a schedule to room
+                // Room exists, get information for that room
+                JSONObject roomInfo = roomArray.getJSONObject(room);
+                
+                
+                // Step 3: Display values for each room
+                if (viewRoomInfo == true) {
+                    for (String key : roomInfo.keySet()) {
+                        Object value = roomInfo.get(key);
+                        System.out.println("Class: " + key + " Time: " + value);
+                    }
+                } else {
+                    for (String key : roomInfo.keySet()) {
+                        System.out.println("Class: " + key);
+                    }
+                }
+                
+            } else { 
+                // Room doesn't exist, error
+                System.out.println("Entry does not exist");
+            }
+            
+        } else { 
+            // Date doesn't exist, error
+            System.out.println("Entry does not exist");
         }
     }
 
