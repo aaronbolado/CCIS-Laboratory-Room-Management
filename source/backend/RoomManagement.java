@@ -17,6 +17,7 @@ public class RoomManagement {
     }
 
     public static void addSchedule () {
+        System.out.println("\n== Add Schedule ==");
         String date = getInput("Enter Date: ");
         String room = getInput("Enter Room: ");
         String section = getInput("Enter Section: ");
@@ -69,6 +70,7 @@ public class RoomManagement {
     
     // Can only delete section and time schedules.
     public static void deleteSchedule () {
+        System.out.println("\n== Delete Schedule ==");
         String date = getInput("Enter Date: ");
         String room = getInput("Enter Room: ");
         String section = getInput("Enter Section: ");
@@ -113,7 +115,7 @@ public class RoomManagement {
 
     public static void showRoomSchedule () {
         boolean viewRoomInfo = false;
-
+        System.out.println("\n== Show Schedule ==");
         String date = getInput("Enter Date: ");
         String room = getInput("Enter Room: ");
         String view = getInput("Is this for room info? ");
