@@ -1,4 +1,4 @@
-package source.backend;
+package rms;
 
 import java.io.*;
 import java.util.*;
@@ -6,7 +6,7 @@ import org.json.*;
 
 public class RoomManagement {
     static Scanner input = new Scanner(System.in);
-    private static String filePath = "source\\backend\\data.json";
+    private static String filePath = "src\\rms\\data.json";
 
     public static void main(String[] args) {
         int menu = 1;

@@ -1,6 +1,8 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\CODING\\libs\\json-20231013.jar"
-    ]
+        "C:\\CODING\\libs\\json-20231013.jar",
+        "C:\\CODING\\libs\\jcalendar-1.4.jar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
 }

@@ -1,48 +1,12 @@
-package source.backend;
+package classscheduler.backend_copy;
 
 import java.io.*;
-import java.util.*;
 import org.json.*;
 
 public class RoomManagement {
-    static Scanner input = new Scanner(System.in);
-    private static String filePath = "source\\backend\\data.json";
+    private static String filePath = "classscheduler\\backend_copy\\data.json";
 
-    public static void main(String[] args) {
-        int menu = 1;
-        
-        do {
-            displayMenu();
-            System.out.print("Enter choice: ");
-            int choice = input.nextInt();
-            input.nextLine();
-            
-            switch (choice) {
-                case 1:
-                addSchedule();
-                    break;
-                case 2:
-                updateSchedule();
-                    break;
-                case 3:
-                showRoomSchedule();
-                    break;
-                case 4:
-                deleteSchedule();
-                    break;
-                default:
-                    menu = 0;
-                    break;
-            }
-        } while (menu == 1);
-    }
-
-    public static void addSchedule() {
-        System.out.println("\n== Add Schedule ==");
-        String date = getInput("Enter Date: ");
-        String room = getInput("Enter Room: ");
-        String section = getInput("Enter Section: ");
-        String time = getInput("Enter Time: ");
+    public static void addSchedule(String date, String room, String section, String time) {
 
         // Read existing JSON data from the file
         JSONObject existingData = readJsonFromFile(filePath);
@@ -77,11 +41,7 @@ public class RoomManagement {
         writeJsonToFile(existingData, filePath);
     }
 
-    public static void deleteSchedule() {
-        System.out.println("\n== Delete Schedule ==");
-        String date = getInput("Enter Date: ");
-        String room = getInput("Enter Room: ");
-        String section = getInput("Enter Section: ");
+    public static void deleteSchedule(String date, String room, String section) {
 
         // Read existing JSON data from the file
         JSONObject existingData = readJsonFromFile(filePath);
@@ -109,12 +69,7 @@ public class RoomManagement {
         writeJsonToFile(existingData, filePath);
     }
 
-    public static void updateSchedule() {
-        System.out.println("\n== Update Schedule ==");
-        String date = getInput("Enter Date: ");
-        String room = getInput("Enter Room: ");
-        String section = getInput("Enter Section: ");
-        String time = getInput("Enter Time: ");
+    public static void updateSchedule(String date, String room, String section, String time) {
 
         // Read existing JSON data from the file
         JSONObject existingData = readJsonFromFile(filePath);
@@ -142,12 +97,8 @@ public class RoomManagement {
         writeJsonToFile(existingData, filePath);
     }
 
-    public static void showRoomSchedule() {
+    public static void showRoomSchedule(String date, String room, String view) {
         boolean viewRoomInfo = false;
-        System.out.println("\n== Show Schedule ==");
-        String date = getInput("Enter Date: ");
-        String room = getInput("Enter Room: ");
-        String view = getInput("Is this for room info? ");
 
         if (view.equalsIgnoreCase("yes")) {
             viewRoomInfo = true;
@@ -202,22 +153,6 @@ public class RoomManagement {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    private static String getInput(String prompt) {
-        System.out.print(prompt);
-        return input.nextLine();
-    }
-
-    private static void displayMenu() {
-        String[] mainMenu = {"\n1. Add Schedule",
-                            "2. Edit Schedule",
-                            "3. Show Schedule",
-                            "4. Delete Schedule"
-        };
-        for (String string : mainMenu) {
-            System.out.println(string);
         }
     }
 }
