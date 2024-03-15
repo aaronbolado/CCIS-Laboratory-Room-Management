@@ -4,6 +4,10 @@
  */
 package rms;
 
+import java.text.SimpleDateFormat;
+
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author xavie
@@ -42,6 +46,9 @@ public class DeleteSchedule extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(103, 146, 122));
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
+        
+        jDateChooser1.getDateEditor().getUiComponent().setEnabled(false);
+
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel1.setText("Delete Schedule");
 
@@ -51,14 +58,14 @@ public class DeleteSchedule extends javax.swing.JFrame {
 
         jLabel5.setText("Select Section");
 
-        selectRoom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectRoom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Room 501", "Room 502", "Room 503", "Room 504", "Room 505", "Room 506", "Room 507", "Room 508" }));
         selectRoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectRoomActionPerformed(evt);
             }
         });
 
-        selectSection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectSection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CS 2-1", "CS 2-1N", "CS 2-2", "CS 2-3", "CS 2-4", "CS 2-5" }));
         selectSection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectSectionActionPerformed(evt);
@@ -137,6 +144,7 @@ public class DeleteSchedule extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void jDateChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {
         if ("date".equals(evt.getPropertyName())) {
@@ -155,7 +163,19 @@ public class DeleteSchedule extends javax.swing.JFrame {
     }//GEN-LAST:event_selectSectionActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this schedule?", "Confirmation", JOptionPane.YES_NO_OPTION) == 0) {
+            // User clicked YES
+            java.util.Date selectedDate = jDateChooser1.getDate();
+        
+            // Format the Date without including the time
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy");
+            String formattedDate = dateFormat.format(selectedDate);
+            RoomManagement.deleteSchedule(formattedDate, selectRoom.getSelectedItem().toString(), selectSection.getSelectedItem().toString());
+        } else {
+            // User clicked NO or closed the dialog
+            JOptionPane.showMessageDialog(null, "Transaction Cancelled", "Message", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("Cancel");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

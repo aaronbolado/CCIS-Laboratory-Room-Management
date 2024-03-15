@@ -1,6 +1,9 @@
 package rms;
 
+import java.awt.event.ActionEvent;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class Admin extends javax.swing.JFrame {
@@ -59,7 +62,7 @@ public class Admin extends javax.swing.JFrame {
         jButton3.setText("Edit Schedule");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //jButton3ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -181,7 +184,7 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Create a new instance of ShowSchedule
-        ShowSchedule showScheduleFrame = new ShowSchedule();
+        ShowSchedule showScheduleFrame = new ShowSchedule(false);
 
         // Set a custom close operation for ShowSchedule frame
         showScheduleFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -201,6 +204,31 @@ public class Admin extends javax.swing.JFrame {
         // Make the ShowSchedule frame visible
         showScheduleFrame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+         // Create a new instance of ShowSchedule for EditSchedule
+         ShowSchedule showScheduleFrame = new ShowSchedule(true);
+
+         // Set a custom close operation for ShowSchedule frame
+         showScheduleFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ 
+         // Disable the button to prevent multiple openings
+         jButton2.setEnabled(false);
+ 
+         // Add a WindowListener to listen for the closing event of ShowSchedule frame
+         showScheduleFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+             @Override
+             public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                 // Re-enable the button when the frame is closed/disposed
+                 jButton2.setEnabled(true);
+             }
+         });
+ 
+         // Make the ShowSchedule frame visible
+         showScheduleFrame.setVisible(true);
+
+         JOptionPane.showMessageDialog(null, "NOTE: Click on the room number you want to edit\n from the 8 room panels", "Help", JOptionPane.INFORMATION_MESSAGE);
+    }
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Create a new instance of DeleteSchedule

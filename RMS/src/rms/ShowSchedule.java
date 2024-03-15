@@ -1,13 +1,30 @@
 package rms;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.text.SimpleDateFormat;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+
+import org.w3c.dom.events.MouseEvent;
+
 public class ShowSchedule extends javax.swing.JFrame {
+
+    private static boolean isAdmin;
 
     /**
      * Creates new form ShowSchedule
      */
-    public ShowSchedule() {
+    public ShowSchedule(boolean forAdmin) {
+        ShowSchedule.isAdmin = forAdmin;
         initComponents();
     }
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,21 +74,19 @@ public class ShowSchedule extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jList6 = new javax.swing.JList<>();
-        jScrollPane24 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
         jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jCalendar1 = new com.toedter.calendar.JCalendar();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane21 = new javax.swing.JScrollPane();
         jTextArea21 = new javax.swing.JTextArea();
+        jButtonEdit = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -83,6 +98,12 @@ public class ShowSchedule extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jCalendar1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCalendar1PropertyChange(evt);
+            }
+        });
 
         jTextArea5.setColumns(20);
         jTextArea5.setRows(5);
@@ -102,14 +123,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel2.setText("Room 501");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(jList1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -137,14 +153,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel8.setText("Room 505");
 
-        jList5.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane9.setViewportView(jList5);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -169,17 +180,12 @@ public class ShowSchedule extends javax.swing.JFrame {
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
-
+        
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel3.setText("Room 502");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(jList2);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -207,14 +213,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel4.setText("Room 503");
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane6.setViewportView(jList3);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -242,14 +243,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel5.setText("Room 504");
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane8.setViewportView(jList4);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -277,14 +273,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel11.setText("Room 508");
 
-        jList8.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane12.setViewportView(jList8);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -312,14 +303,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel10.setText("Room 507");
 
-        jList7.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane11.setViewportView(jList7);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
@@ -347,14 +333,9 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jPanel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel9.setText("Room 506");
 
-        jList6.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane10.setViewportView(jList6);
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
@@ -380,12 +361,43 @@ public class ShowSchedule extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextArea3.setColumns(20);
+        jTextArea3.setColumns(5);
         jTextArea3.setRows(5);
-        jScrollPane24.setViewportView(jTextArea3);
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextArea3.setEditable(false);
+ 
+        jLabel12.setFont(new java.awt.Font("Alata", Font.PLAIN, 18)); // NOI18N
         jLabel12.setText("South Wing | 5th Floor");
+
+        // Makes custom buttons using panels
+        jPanel8.addMouseListener(new CustomPanelMouseListener());
+        jPanel11.addMouseListener(new CustomPanelMouseListener());
+        jPanel12.addMouseListener(new CustomPanelMouseListener());
+        jPanel13.addMouseListener(new CustomPanelMouseListener());
+
+        jPanel10.addMouseListener(new CustomPanelMouseListener());
+        jPanel16.addMouseListener(new CustomPanelMouseListener());
+        jPanel15.addMouseListener(new CustomPanelMouseListener());
+        jPanel14.addMouseListener(new CustomPanelMouseListener());
+
+        // Top side
+        jPanel8.setMaximumSize(new java.awt.Dimension(150,231));
+        jPanel8.setPreferredSize(new java.awt.Dimension(150,231));
+        jPanel11.setMaximumSize(new java.awt.Dimension(150,231));
+        jPanel11.setPreferredSize(new java.awt.Dimension(150,231));
+        jPanel12.setMaximumSize(new java.awt.Dimension(150,231));
+        jPanel12.setPreferredSize(new java.awt.Dimension(150,231));
+        jPanel13.setMaximumSize(new java.awt.Dimension(150,231));
+        jPanel13.setPreferredSize(new java.awt.Dimension(150,231));
+        
+        // Bot side
+        jPanel10.setMaximumSize(new java.awt.Dimension(150,100));
+        jPanel10.setPreferredSize(new java.awt.Dimension(150,100));
+        jPanel16.setMaximumSize(new java.awt.Dimension(150,100));
+        jPanel16.setPreferredSize(new java.awt.Dimension(150,100));
+        jPanel15.setMaximumSize(new java.awt.Dimension(150,100));
+        jPanel15.setPreferredSize(new java.awt.Dimension(150,100));
+        jPanel14.setMaximumSize(new java.awt.Dimension(150,100));
+        jPanel14.setPreferredSize(new java.awt.Dimension(150,100));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -406,7 +418,7 @@ public class ShowSchedule extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jScrollPane24))
+                    .addComponent(jTextArea3))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -421,7 +433,7 @@ public class ShowSchedule extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane24, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextArea3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addGap(18, 18, 18)
@@ -442,7 +454,7 @@ public class ShowSchedule extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(103, 146, 122));
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Alata", Font.BOLD, 36)); // NOI18N
         jLabel1.setText("ROOM INFO");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -461,15 +473,21 @@ public class ShowSchedule extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
+        
+        // Room #
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
+        jTextArea1.setText("Room #");;
+        jTextArea1.setFont(new java.awt.Font("Alata", Font.PLAIN, 20));
+        jTextArea1.setEditable(false);
+        
+        // Status
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
+        jTextArea2.setText("Status: ---");;
+        jTextArea2.setFont(new java.awt.Font("Alata", Font.PLAIN, 20));
+        jTextArea2.setEditable(false);
+        
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -480,9 +498,9 @@ public class ShowSchedule extends javax.swing.JFrame {
                     .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(jTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -492,12 +510,12 @@ public class ShowSchedule extends javax.swing.JFrame {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jTextArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(jTextArea2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-        );
+        );           
 
         jPanel5.setBackground(new java.awt.Color(103, 146, 122));
         jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
@@ -506,7 +524,11 @@ public class ShowSchedule extends javax.swing.JFrame {
 
         jTextArea21.setColumns(20);
         jTextArea21.setRows(5);
+        jTextArea21.setFont(new java.awt.Font("Alata", Font.BOLD, 20));
+        jTextArea21.setEditable(false);
         jScrollPane21.setViewportView(jTextArea21);
+        jButtonEdit.setText("Edit");
+        jButtonEdit.setFont(new java.awt.Font("Alata", Font.BOLD, 20));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -567,6 +589,8 @@ public class ShowSchedule extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000,637));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1000,637));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -580,53 +604,104 @@ public class ShowSchedule extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    static String globalFormattedDate;
+
     private void jCalendar1PropertyChange(java.beans.PropertyChangeEvent evt) {
-        if ("date".equals(evt.getPropertyName())) {
-            // Handle the date change here
-            java.util.Date selectedDate = jCalendar1 .getDate();
-            // You can now use 'selectedDate' in your backend logic
-            System.out.println("Selected Date: " + selectedDate);
+        
+        java.util.Date selectedDate = jCalendar1.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy");
+        String formattedDate = dateFormat.format(selectedDate);
+        globalFormattedDate = formattedDate;
+
+        DefaultListModel<String> updatedModel501 = RoomManagement.updateSectionList(jLabel2.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel502 = RoomManagement.updateSectionList(jLabel3.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel503 = RoomManagement.updateSectionList(jLabel4.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel504 = RoomManagement.updateSectionList(jLabel5.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel505 = RoomManagement.updateSectionList(jLabel8.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel506 = RoomManagement.updateSectionList(jLabel9.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel507 = RoomManagement.updateSectionList(jLabel10.getText(), formattedDate, "no");
+        DefaultListModel<String> updatedModel508 = RoomManagement.updateSectionList(jLabel11.getText(), formattedDate, "no");
+        
+        dateFormat = new SimpleDateFormat("MMMM dd, EEEE");
+        formattedDate = dateFormat.format(selectedDate);
+
+        jTextArea3.setFont(new java.awt.Font("Alata", Font.PLAIN, 20));
+        jTextArea3.setBackground(Color.decode("#EFEDE4"));
+        jTextArea3.setText(formattedDate);
+        
+        jList1.setModel(updatedModel501);  
+        jList2.setModel(updatedModel502);  
+        jList3.setModel(updatedModel503);  
+        jList4.setModel(updatedModel504);  
+        jList5.setModel(updatedModel505);  
+        jList6.setModel(updatedModel506);  
+        jList7.setModel(updatedModel507);  
+        jList8.setModel(updatedModel508);
+
+        jTextArea1.setText("Room #");
+        jTextArea2.setText("Status: ---");
+        jTextArea2.setBackground(Color.WHITE);
+        jTextArea21.setText("");
+    }
+
+    private static class CustomPanelMouseListener extends java.awt.event.MouseAdapter {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent e) {
+        // Assuming the source of the event is a JPanel containing a JLabel
+            if (e.getSource() instanceof JPanel) {
+                jTextArea2.setText("Status: ---");
+                JPanel panel = (JPanel) e.getSource();
+                java.awt.Component[] components = panel.getComponents();
+
+                for (java.awt.Component component : components) {
+                    if (component instanceof JLabel) {
+                        String labelText = ((JLabel) component).getText();
+                        jTextArea2.setText("Status: " + (RoomManagement.isVacant(globalFormattedDate, labelText)? "FULL" : "VACANT" ));
+                        if (jTextArea2.getText().equalsIgnoreCase("Status: Vacant")) {
+                            jTextArea2.setBackground(Color.decode("#C8D483"));
+                        }
+                        else if(jTextArea2.getText().equalsIgnoreCase("Status: Full")){
+                            jTextArea2.setBackground(Color.decode("#E45549"));
+                        }
+
+                        jTextArea1.setText(labelText);
+                        RoomManagement.updateSectionList(labelText, globalFormattedDate, "yes", jTextArea21);
+                        
+                        if(isAdmin == true){
+                            EditSchedule editScheduleFrame = new EditSchedule();
+                            // Set a custom close operation for ShowSchedule frame
+                            editScheduleFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            // Disable the button to prevent multiple openings
+                            component.setEnabled(false);
+            
+                            // Add a WindowListener to listen for the closing event of ShowSchedule frame
+                            editScheduleFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+                                @Override
+                                public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                                    // Re-enable the button when the frame is closed/disposed
+                                    component.setEnabled(true);
+                                }
+                            });
+            
+                            // Make the ShowSchedule frame visible
+                            editScheduleFrame.setVisible(true);
+                        }
+        
+                    }
+                }
+            }
         }
     }
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShowSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShowSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShowSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShowSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ShowSchedule().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JCalendar jCalendar1;
+    private static com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -660,13 +735,10 @@ public class ShowSchedule extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane21;
-    private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -674,11 +746,12 @@ public class ShowSchedule extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea21;
+    private static javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JTextArea jTextArea2;
+    private static javax.swing.JTextArea jTextArea21;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextArea jTextArea7;
+    private javax.swing.JButton jButtonEdit; 
     // End of variables declaration//GEN-END:variables
 }

@@ -136,7 +136,7 @@ public class Home extends javax.swing.JFrame {
 
     private void userButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userButtonActionPerformed
         
-        ShowSchedule ShowScheduleFrame = new ShowSchedule();
+        ShowSchedule ShowScheduleFrame = new ShowSchedule(false);
     
         ShowScheduleFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

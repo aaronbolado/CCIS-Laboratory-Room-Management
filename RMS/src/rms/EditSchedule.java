@@ -5,12 +5,12 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-public class AddSchedule extends javax.swing.JFrame {
+public class EditSchedule extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddSchedule
+     * Creates new form EditSchedule
      */
-    public AddSchedule() {
+    public EditSchedule() {
         initComponents();
     }
 
@@ -48,7 +48,7 @@ public class AddSchedule extends javax.swing.JFrame {
         jDateChooser2.getDateEditor().getUiComponent().setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel1.setText("Add Schedule");
+        jLabel1.setText("Edit Schedule");
 
         jLabel2.setText("Select Date");
 
@@ -182,6 +182,7 @@ public class AddSchedule extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -226,17 +227,27 @@ public class AddSchedule extends javax.swing.JFrame {
 
         Date startTime = RoomManagement.parseTime(selectStartTime.getSelectedItem().toString());
         Date endTime = RoomManagement.parseTime(selectEndTime.getSelectedItem().toString());
-    
+
         // Invalid time range (end time is before start time)
         if (startTime.after(endTime)) {
             JOptionPane.showMessageDialog(null, "Schedule format is invalid", "Error: Input invalid", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Format the Date without including the time
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy");
-            String formattedDate = dateFormat.format(selectedDate);
-            String selectedTime = selectStartTime.getSelectedItem().toString() + "-" + selectEndTime.getSelectedItem().toString();
-            RoomManagement.addSchedule(formattedDate, selectRoom.getSelectedItem().toString(), selectSection.getSelectedItem().toString(), selectedTime, selectStartTime.getSelectedItem().toString(), selectEndTime.getSelectedItem().toString());
+            if (JOptionPane.showConfirmDialog(null, "Are you sure you want to update this schedule?", "Confirmation", JOptionPane.YES_NO_OPTION) == 0) {
+                // User clicked YES
+
+                // Format the Date without including the time
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy");
+                String formattedDate = dateFormat.format(selectedDate);
+                String selectedTime = selectStartTime.getSelectedItem().toString() + "-" + selectEndTime.getSelectedItem().toString();
+                RoomManagement.updateSchedule(formattedDate, selectRoom.getSelectedItem().toString(), selectSection.getSelectedItem().toString(), selectedTime, selectStartTime.getSelectedItem().toString(), selectEndTime.getSelectedItem().toString());
+            
+            } else {
+                // User clicked NO or closed the dialog
+                JOptionPane.showMessageDialog(null, "Transaction Cancelled", "Message", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Cancel");
+            }
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void selectRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectRoomActionPerformed
@@ -272,20 +283,20 @@ public class AddSchedule extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditSchedule.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddSchedule().setVisible(true);
+                new EditSchedule().setVisible(true);
             }
         });
     }
